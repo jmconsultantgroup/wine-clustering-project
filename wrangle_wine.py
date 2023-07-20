@@ -1,11 +1,9 @@
 import pandas as pd
 import numpy as np
-from env import get_db_url
-import os
+
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from pydataset import data
-from env import get_db_url
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
@@ -14,31 +12,20 @@ from sklearn.preprocessing import MinMaxScaler
 # -----------------------------acquire--------------------------------
 
 
-def new_mall_data():
+def wine_merge_data():
      
-    conn = get_db_url('mall_customers')
-
-    query = '''
-           SELECT *
-            FROM customers;
-            '''
-
+    df_red = pd.read_csv('https://query.data.world/s/hak4rebpd7f6xonzxkpsg5cvc7xnuf?dws=00000')
+    df_red['strain'] = 'red'
     
-    df = pd.read_sql(query, conn)
+    df_white = pd.read_csv('https://query.data.world/s/5d3mv3aqzasknnepvoc7boia7pyftu?dws=00000')
+    df_white['strain'] = 'white'
+    
+    df = pd.concat([df_red, df_white], ignore_index=True)
+    
+
     return df
 
-def get_mall_data():
-   
-    if os.path.isfile('mall_df.csv'):
-        df = pd.read_csv('mall_df.csv', index_col = 0)
-        
 
-    else:
-
-        df = new_mall_data()
-        df.to_csv('mall_df.csv')
-        
-    return df
 
 # -----------------------------outliers--------------------------------
 
@@ -64,32 +51,24 @@ def detect_outliers_iqr(df, columns, threshold=1.5):
     
     return outliers
 # -----------------------------prep--------------------------------
-def prep_mall_data(df):
+def prep_wine_data(df):
     
-    
-    def handle_missing_values(df, prop_required_column=0.5, prop_required_row=0.5):
-       
-        threshold_col = int(round(prop_required_column * len(df.index)))
-        df = df.dropna(thresh=threshold_col, axis=1)
-    
-        threshold_row = int(round(prop_required_row * len(df.columns)))
-        df = df.dropna(thresh=threshold_row)
-    
-        return df
-
-    df = handle_missing_values(df)
-    
-    encoded_cols = pd.get_dummies(df['gender'], prefix='gender')
+    df = df.rename(columns ={
+                   'acohol': 'proof'
+        
+    })
+  
+    encoded_cols = pd.get_dummies(df['strain'], prefix='strain')
     df = pd.concat([df, encoded_cols], axis=1)
     
-    train, validate, test = split_mall_data(df)
+    train, validate, test = split_wine_data(df)
     
     return train, validate, test
 # -----------------------------split--------------------------------
 
 
 
-def split_mall_data(df):
+def split_wine_data(df):
     
   
     train_validate, test = train_test_split(df, test_size=.2, random_state=123)
@@ -106,7 +85,9 @@ def split_mall_data(df):
 def scale_data(train, validate, test):
     
     
-    numeric_cols = ['spending_score','annual_income','age']
+    numeric_cols = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar',
+       'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density',
+       'pH', 'sulphates', 'alcohol']
     
     train_scaled = train.copy()
     validate_scaled = validate.copy()
@@ -122,8 +103,8 @@ def scale_data(train, validate, test):
     return train_scaled, validate_scaled, test_scaled
 
 
-def wrangle_mall():
+def wrangle_wine():
   
-    df = get_mall_data()
-    train, validate, test = prep_mall_data(df)
+    df = wine_merge_data()
+    train, validate, test = prep_wine_data(df)
     return train, validate, test
