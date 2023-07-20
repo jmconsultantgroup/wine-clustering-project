@@ -52,15 +52,16 @@ def detect_outliers_iqr(df, columns, threshold=1.5):
     return outliers
 # -----------------------------prep--------------------------------
 def prep_wine_data(df):
-    
-    df = df.rename(columns ={
-                   'acohol': 'proof'
-        
-    })
+    # Rename the 'alcohol' column to 'proof'
+
   
+    # Perform one-hot encoding on the 'strain' column
     encoded_cols = pd.get_dummies(df['strain'], prefix='strain')
     df = pd.concat([df, encoded_cols], axis=1)
+    df = df.rename(columns={'alcohol': 'proof'})
+    df = df.drop_duplicates()
     
+    # Assuming 'split_wine_data' is a custom function to split the data into train, validate, and test sets
     train, validate, test = split_wine_data(df)
     
     return train, validate, test
@@ -87,7 +88,7 @@ def scale_data(train, validate, test):
     
     numeric_cols = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar',
        'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density',
-       'pH', 'sulphates', 'alcohol']
+       'pH', 'sulphates', 'proof']
     
     train_scaled = train.copy()
     validate_scaled = validate.copy()
