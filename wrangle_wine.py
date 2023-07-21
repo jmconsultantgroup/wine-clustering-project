@@ -54,7 +54,9 @@ def detect_outliers_iqr(df, columns, threshold=1.5):
 def prep_wine_data(df):
     # Rename the 'alcohol' column to 'proof'
 
-  
+    quality_median = df['quality'].median()
+    df['quality_bin'] = df['quality'].apply(lambda x: 1 if x > quality_median else 0)
+    
     # Perform one-hot encoding on the 'strain' column
     encoded_cols = pd.get_dummies(df['strain'], prefix='strain')
     df = pd.concat([df, encoded_cols], axis=1)
