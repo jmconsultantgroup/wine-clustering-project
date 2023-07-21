@@ -204,10 +204,6 @@ Proof had the highest correlation with wine quality, while citric acid and free 
 
     
 #### Model 1: 3 Feature Logistic Regression(LogReg)
-3 feature LogReg	0.530424	0.521812	0.01
-5	cluster_k6 with proof, free sulfur dioxide, citric acid LogReg	0.530424	0.521812	0.01
-4	cluster_k5 with proof, free sulfur dioxide, citric acid LogReg	0.530424	0.521812	0.01
-
 
 
 ##### The 3 Feature Logistic Regression model had a validation accuracy of 52% which was 7% better than baseline's 45% accuracy
