@@ -176,7 +176,7 @@ Alternative Hypothesis (H1): Citric acid has a correlation with wine quality.
 
 
 #### Summary: 
-bathroom_count and calc_sqr_ft have a moderate correlation with the target(tax_value). However, yearbuilt, bedroom_count and the county code dummies have a very week correlation with the target.
+Proof had the highest correlation with wine quality, while citric acid and free sulfur dioxide had a correlation but a much weaker one.
 
 
 
