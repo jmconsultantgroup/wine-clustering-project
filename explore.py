@@ -21,31 +21,6 @@ def plot_variable_pairs(df):
         
         
 
-    
-# def plot_categorical_and_continuous_vars(df, cat_var_col, con_var_col):
-#     '''This function graphs a swarmplot that shows the density of home values within each county.'''
-    
-    
-#     # sample the data to make the graph readable
-#     df = df.sample(n=1000)
-    
-#     plt.figure(figsize=(12, 6)) 
-
-#     fig, axs = plt.subplots(1, 3, figsize=(18, 8))
-    
-#     sns.stripplot(ax=axs[0], x=cat_var_col, y=con_var_col, data=df)
-#     axs[0].set_title('Strip Plot')
-    
-
-#     sns.violinplot(x=cat_var_col, y=con_var_col, data=df, s=1)
-#     axs[2].set_title('Violin Plot')
-
-#     plt.title('Features Vs Wine Quality')
-#     plt.show()
-
-    
-    
-
 def plot_continuous_vs_categorical(df, cat_var_col, con_var_col):
 
     for con_var in con_var_col:
