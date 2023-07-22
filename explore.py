@@ -18,9 +18,11 @@ def plot_variable_pairs(df):
     
     for col in cols:
         sns.lmplot(data=df, y=col, x=target)
-        
-        
+              
+        plt.show()
 
+
+    
 def plot_continuous_vs_categorical(df, cat_var_col, con_var_col):
 
     for con_var in con_var_col:
