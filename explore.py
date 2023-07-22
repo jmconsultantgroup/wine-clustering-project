@@ -11,16 +11,30 @@ import warnings
 warnings.filterwarnings('ignore')
     
 
+
 def plot_variable_pairs(df):
-    cols = ['fixed acidity','volatile acidity', 'citric acid','residual sugar','chlorides',   
-    'free sulfur dioxide' ,'total sulfur dioxide','density','pH','sulphates','proof']
+    cols = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar', 'chlorides',   
+            'free sulfur dioxide', 'total sulfur dioxide', 'density', 'pH', 'sulphates', 'proof']
     target = 'quality'
     
     for col in cols:
         sns.lmplot(data=df, y=col, x=target)
-              
         plt.show()
 
+
+
+def get_citric_acid(df):
+    '''This function takes a sample of the train data and returns a lmplot between bedcount and home value.'''
+    
+    df = df.sample(n=1000) 
+    
+    sns.lmplot(data=df, x='citric acid', y='quality', scatter_kws={'color':'blue'})
+    
+    plt.ylabel('Quality')
+    plt.xlabel('Number of Bedrooms')
+    plt.title('Is there a relationship between citric acid and wine quality')
+    
+    plt.show()
 
     
 def plot_continuous_vs_categorical(df, cat_var_col, con_var_col):
