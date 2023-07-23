@@ -263,4 +263,16 @@ Proof had the highest correlation with wine quality, while citric acid and free 
 #### Considering all models, as they did all beat baseline, the 3 Feature LogReg model was picked as most optimal as it contained the lowest amount of features for the same scoring outputs.
 ####
 
+
+***
+## <a name="sources"></a>Sources:
+
+
+#### 1. Cortez, P., Cerdeira, A., Almeida, F., Matos, T., & Reis, J. (2009). Modeling wine preferences by data mining from physicochemical properties. Decision Support Systems, 47(4), 547-553. Retrieved from http://dx.doi.org/10.1016/j.dss.2009.05.016.
+#### 
+#### 2. Preda, C., Lopes, G. R. V. D., & Rodrigues, L. M. C. (2009). Wine Quality Data Set. data.world. Retrieved from https://data.world/food/wine-quality.
+#### 
+
+
+
 [[Back to top](#top)]
