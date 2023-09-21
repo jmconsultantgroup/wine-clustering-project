@@ -1,3 +1,7 @@
+
+![Wine Logo](images/wine_logo.png)
+
+
 # <a name="top"></a>Wine Project - Finding Drivers of Wine Quality
 ![]()
 
